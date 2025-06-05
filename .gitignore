@@ -1,0 +1,74 @@
+# dependencies
+.vs/
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs
+*.log
+
+# Compiled output
+dist
+dist-ssr
+
+# More specific compiled output / local machine files
+*.local
+bin/
+obj/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Configuration files with sensitive data (if you intend to keep a template, name it e.g., appsettings.template.json and track that instead)
+# edusync_api/appsettings.json # Consider if this should be ignored or if it only contains placeholders
+appsettings.Development.json
+# appsettings.json # Usually tracked if it only contains placeholders or non-sensitive defaults
+
+# Environment files
+.env
+*.env
+!.env.example # It's good practice to commit an example env file
+
+# User secrets files and related Visual Studio files
+**/secrets.json
+**/*.user
+**/*.userosscache
+**/*.suo # Duplicated, can be removed from one place
+**/*.userprefs
+
+# Scripts that might set or contain secrets
+**/set-secrets.ps1
+set-secrets.ps1
+
