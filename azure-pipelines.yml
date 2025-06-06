@@ -1,35 +1,53 @@
-# azure-pipelines-backend.yml
 trigger:
-- master
+  - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
+  azureWebAppName: 'EduSync-App' # Your Azure App Service name
 
 steps:
 - task: UseDotNet@2
+  displayName: 'Install .NET SDK'
   inputs:
     packageType: 'sdk'
-    version: '8.x'
-    installationPath: $(Agent.ToolsDirectory)/dotnet
+    version: '8.0.x' # Use your .NET version
 
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'Build .NET Project'
+- task: DotNetCoreCLI@2
+  displayName: 'Restore NuGet packages'
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
 
-- script: dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
-  displayName: 'Publish .NET Project'
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test'
+  inputs:
+    command: 'test'
+    projects: '**/*[Tt]ests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+    publishTestResults: true
+  continueOnError: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish'
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
 
 - task: AzureWebApp@1
+  displayName: 'Deploy to Azure Web App'
   inputs:
-    azureSubscription: 'edusyncconnection' 
-    appType: 'webApp'
-    appName: 'edusyncvirendraback'
-    package: '$(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    azureSubscription: 'Vedan-shSharma'
+    appName: '$EduSync-App'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
