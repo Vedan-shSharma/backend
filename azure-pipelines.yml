@@ -49,5 +49,5 @@ steps:
   displayName: 'Deploy to Azure Web App'
   inputs:
     azureSubscription: 'AzureRM-Connection'
-    appName: '$EduSync-App'
+    appName: 'EduSync-App'
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
