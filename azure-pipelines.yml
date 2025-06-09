@@ -48,6 +48,6 @@ steps:
 - task: AzureWebApp@1
   displayName: 'Deploy to Azure Web App'
   inputs:
-    azureSubscription: 'Vedan-shSharma'
+    azureSubscription: 'AzureRM-Connection'
     appName: '$EduSync-App'
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
