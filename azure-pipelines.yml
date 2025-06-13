@@ -7,7 +7,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   azureWebAppName: 'Edusync-web' # Your Azure App Service name
-  azureSubscription: 'Azure for Students' # Your Azure DevOps service connection name
+  azureSubscription: 'AzureForStudentsConnection' # <-- Use the exact name of your service connection
 
 steps:
 - task: UseDotNet@2
