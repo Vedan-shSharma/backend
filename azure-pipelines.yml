@@ -6,7 +6,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  azureWebAppName: 'EduSync-App' # Your Azure App Service name
+  azureWebAppName: 'Edusync-web' # Your Azure App Service name
+  azureSubscription: 'Azure for Students' # Your Azure DevOps service connection name
 
 steps:
 - task: UseDotNet@2
@@ -48,6 +49,6 @@ steps:
 - task: AzureWebApp@1
   displayName: 'Deploy to Azure Web App'
   inputs:
-    azureSubscription: 'AzureRM-Connection'
-    appName: 'EduSync-App'
+    azureSubscription: '$(azureSubscription)'
+    appName: '$(azureWebAppName)'
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
